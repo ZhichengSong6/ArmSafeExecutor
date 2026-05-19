@@ -1,4 +1,5 @@
 # catkin build outputs
+.catkin_tools/
 build/
 devel/
 install/
