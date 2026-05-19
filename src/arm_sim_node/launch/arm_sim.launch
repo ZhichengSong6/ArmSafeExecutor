@@ -1,0 +1,111 @@
+<launch>
+    <param name="robot_description"
+           textfile="$(find arm_sim_node)/urdf/Arm.urdf" />
+
+    <node pkg="robot_state_publisher"
+          type="robot_state_publisher"
+          name="robot_state_publisher"
+          output="screen" />
+
+    <node pkg="arm_sim_node"
+        type="arm_sim_node"
+        name="arm_sim_node"
+        output="screen">
+
+        <param name="robot_description_param" value="/robot_description" />
+        <param name="joint_states_topic" value="/joint_states" />
+        <param name="command_topic" value="/arm_controller/joint_ref" />
+
+        <param name="publish_rate" value="100.0" />
+        <param name="kp" value="5.0" />
+        <param name="default_velocity_limit" value="0.5" />
+
+        <param name="command_timeout" value="0.5" />
+        <param name="use_command_gains" value="false" />
+        <param name="command_kp_scale" value="1.0" />
+        <param name="max_tracking_kp" value="20.0" />
+
+        <rosparam param="joint_names">
+            - joint1
+            - joint2
+            - joint3
+            - joint4
+            - wrist_joint1
+            - wrist_joint2
+            - wrist_joint3
+        </rosparam>
+
+        <rosparam param="initial_positions">
+            joint1: 0.0
+            joint2: 0.0
+            joint3: 0.0
+            joint4: 0.0
+            wrist_joint1: 0.0
+            wrist_joint2: 0.0
+            wrist_joint3: 0.0
+        </rosparam>
+    </node>
+
+    <node pkg="arm_sim_node"
+        type="interactive_marker_node"
+        name="interactive_marker_node"
+        output="screen">
+
+        <param name="server_name" value="ee_interactive_marker" />
+        <param name="base_frame" value="base_link" />
+        <param name="ee_frame" value="EE_link" />
+        <param name="target_pose_topic" value="/ee_target_pose" />
+        <param name="marker_scale" value="0.06" />
+
+        <param name="fallback_x" value="0.3" />
+        <param name="fallback_y" value="0.0" />
+        <param name="fallback_z" value="0.3" />
+    </node>
+
+    <node pkg="arm_sim_node"
+        type="pinocchio_controller_node"
+        name="pinocchio_controller_node"
+        output="screen">
+
+        <param name="robot_description_param" value="/robot_description" />
+        <param name="base_frame" value="base_link" />
+        <param name="ee_frame" value="EE_link" />
+
+        <param name="joint_states_topic" value="/joint_states" />
+        <param name="target_pose_topic" value="/ee_target_pose" />
+        <param name="command_topic" value="/arm_controller/joint_ref" />
+
+        <param name="control_rate" value="100.0" />
+        <param name="trajectory_duration" value="2.0" />
+
+        <param name="ik_max_iters" value="150" />
+        <param name="ik_eps" value="0.0005" />
+        <param name="ik_position_eps" value="0.0005" />
+        <param name="ik_orientation_eps" value="0.05" />
+        <param name="ik_damping" value="0.001" />
+        <param name="ik_step_size" value="0.5" />
+        <param name="ik_max_delta_q" value="0.08" />
+        <param name="numeric_jac_eps" value="0.000001" />
+        <param name="orientation_weight" value="0.5" />
+
+        <param name="default_kp" value="20.0" />
+        <param name="default_kd" value="1.0" />
+        <param name="default_tau_ff" value="0.0" />
+
+        <rosparam param="joint_names">
+            - joint1
+            - joint2
+            - joint3
+            - joint4
+            - wrist_joint1
+            - wrist_joint2
+            - wrist_joint3
+        </rosparam>
+    </node>
+
+    <node pkg="rviz"
+      type="rviz"
+      name="rviz"
+      args="-d $(find arm_sim_node)/rviz/arm.rviz"
+      output="screen" />
+</launch>

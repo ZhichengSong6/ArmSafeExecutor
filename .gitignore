@@ -1,0 +1,38 @@
+# catkin build outputs
+build/
+devel/
+install/
+logs/
+
+# ROS
+.ros/
+*.bag
+*.bag.active
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.cache/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+
+# large/generated data
+data/
+datasets/
+recordings/
+outputs/
