@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cmath>
 #include <cstdint>
 #include <cstring>
 #include <iostream>
@@ -117,7 +118,13 @@ public:
         pub_intensity_ = nh_.advertise<sensor_msgs::Image>("intensity", 10);
         pub_status_ = nh_.advertise<sensor_msgs::Image>("status", 10);
 
+        // 仅用于判断当前点云数值坐标轴的物理方向：
+        // 只发布 x > 0 且 y > 0 且 z > 0 的点，原始 cloud 与 RGB 颜色投影完全不变。
+        pub_first_quadrant_cloud_ = nh_.advertise<sensor_msgs::PointCloud2>("first_quadrant_cloud", 1);
+
         ROS_INFO_STREAM("[" << name_ << "] initialized. Topics are under /" << name_ << "/...");
+        ROS_INFO_STREAM("[" << name_ << "] quadrant test topic: /" << name_
+                        << "/first_quadrant_cloud (x > 0, y > 0, z > 0)");
         return true;
     }
 
@@ -311,6 +318,19 @@ private:
         pcmsg.data.resize(320 * 240 * pcmsg.point_step, 0x00);
         uint8_t* ptr = pcmsg.data.data();
 
+        // 测试点云：只保留当前数值坐标中的第一象限点。
+        // 注意：该筛选只观察当前发布数据的 x/y 语义，不对 xyz 做任何修正。
+        sensor_msgs::PointCloud2 first_quadrant_msg;
+        first_quadrant_msg.header = header;
+        first_quadrant_msg.height = 1;
+        first_quadrant_msg.width = 0;
+        first_quadrant_msg.is_bigendian = pcmsg.is_bigendian;
+        first_quadrant_msg.point_step = pcmsg.point_step;
+        first_quadrant_msg.row_step = 0;
+        first_quadrant_msg.is_dense = false;
+        first_quadrant_msg.fields = pcmsg.fields;
+        first_quadrant_msg.data.reserve(pcmsg.data.size() / 4);
+
         for (int j = 0; j < 240; ++j) {
             for (int i = 0; i < 320; ++i) {
                 const float cx = (static_cast<float>(i) - u0) / fox;
@@ -334,11 +354,31 @@ private:
                 const float intensity = static_cast<float>(tempcali_ir[j * 320 + i]);
                 std::memcpy(ptr + 16, &intensity, sizeof(float));
 
+                // 只显示当前点云数值坐标中的第一象限：x > 0, y > 0。
+                // z > 0 用于排除无效/零深度点。保留 rgb 与 intensity 字段。
+                if (std::isfinite(x) && std::isfinite(y) && std::isfinite(z) &&
+                    x > 0.0f && y > 0.0f && z > 0.0f) {
+                    first_quadrant_msg.data.insert(
+                        first_quadrant_msg.data.end(),
+                        ptr,
+                        ptr + pcmsg.point_step);
+                    ++first_quadrant_msg.width;
+                }
+
                 ptr += pcmsg.point_step;
             }
         }
 
         pub_pc_.publish(pcmsg);
+
+        first_quadrant_msg.row_step = first_quadrant_msg.point_step * first_quadrant_msg.width;
+        pub_first_quadrant_cloud_.publish(first_quadrant_msg);
+
+        ROS_INFO_STREAM_THROTTLE(
+            1.0,
+            "[" << name_ << "] first_quadrant_cloud points: "
+            << first_quadrant_msg.width
+            << " (condition: x > 0, y > 0, z > 0)");
     }
 
 private:
@@ -353,6 +393,7 @@ private:
     ros::Publisher pub_depth_;
     ros::Publisher pub_intensity_;
     ros::Publisher pub_status_;
+    ros::Publisher pub_first_quadrant_cloud_;
 
     event_base* base_ = nullptr;
     evhttp_connection* conn_ = nullptr;

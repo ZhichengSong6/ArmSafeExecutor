@@ -1,0 +1,92 @@
+<launch>
+    <!-- ================== Pinocchio nominal controller ================== -->
+    <node pkg="arm_control"
+          type="pinocchio_controller_node"
+          name="pinocchio_controller_node"
+          output="screen">
+
+        <param name="robot_description_param" value="/robot_description" />
+        <param name="base_frame" value="base_link" />
+        <param name="ee_frame" value="EE_link" />
+
+        <param name="joint_states_topic" value="/joint_states" />
+        <param name="target_pose_topic" value="/ee_target_pose" />
+
+        <param name="command_topic" value="/arm_controller/joint_ref_nominal" />
+
+        <param name="control_rate" value="100.0" />
+        <param name="trajectory_duration" value="2.0" />
+
+        <param name="ik_max_iters" value="150" />
+        <param name="ik_eps" value="0.0005" />
+        <param name="ik_position_eps" value="0.0005" />
+        <param name="ik_orientation_eps" value="0.05" />
+        <param name="ik_damping" value="0.001" />
+        <param name="ik_step_size" value="0.5" />
+        <param name="ik_max_delta_q" value="0.08" />
+        <param name="orientation_weight" value="0.5" />
+
+        <param name="default_kp" value="20.0" />
+        <param name="default_kd" value="1.0" />
+        <param name="default_tau_ff" value="0.0" />
+
+        <rosparam param="joint_names">
+            - joint1
+            - joint2
+            - joint3
+            - joint4
+            - wrist_joint1
+            - wrist_joint2
+            - wrist_joint3
+        </rosparam>
+    </node>
+
+    <!-- ========= Safety filter: pass-through + fused point cloud ========= -->
+    <node pkg="arm_safety_filter"
+          type="pointcloud_qp_safety_filter_node"
+          name="pointcloud_qp_safety_filter_node"
+          output="screen">
+
+        <!-- Existing command pass-through branch -->
+        <param name="nominal_command_topic"
+               value="/arm_controller/joint_ref_nominal" />
+
+        <param name="safe_command_topic"
+               value="/arm_controller/joint_ref" />
+
+        <!-- Two link-mounted ToF point-cloud inputs -->
+        <param name="cloud_topic_1"
+               value="/link4_sensor1/tof/cloud" />
+
+        <param name="cloud_topic_2"
+               value="/link4_sensor2/tof/cloud" />
+
+        <!-- Debug outputs after transformation into base_link -->
+        <param name="cloud_1_base_topic"
+               value="/arm_safety_filter/cloud_1_base" />
+
+        <param name="cloud_2_base_topic"
+               value="/arm_safety_filter/cloud_2_base" />
+
+        <!-- Fused XYZ-only point cloud for subsequent safety computation -->
+        <param name="fused_cloud_topic"
+               value="/arm_safety_filter/fused_cloud" />
+
+        <param name="target_frame"
+               value="base_link" />
+
+        <!-- Synchronization and TF settings -->
+        <param name="cloud_sub_queue_size"
+               value="5" />
+
+        <param name="cloud_sync_queue_size"
+               value="10" />
+
+        <param name="cloud_sync_slop"
+               value="0.05" />
+
+        <param name="tf_timeout"
+               value="0.05" />
+
+    </node>
+</launch>

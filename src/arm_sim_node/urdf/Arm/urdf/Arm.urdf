@@ -1,0 +1,1778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Arm">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.00110280922060463 -1.98703837603579E-05 0.0390910140862879"
+        rpy="0 0 0" />
+      <mass
+        value="0.766851050223607" />
+      <inertia
+        ixx="0.00181952459266476"
+        ixy="4.67099257515186E-07"
+        ixz="2.90512573822123E-05"
+        iyy="0.00175770181428764"
+        iyz="-1.79295513788839E-07"
+        izz="0.00301277451685566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="3.99351013802069E-05 2.96986005834421E-07 0.0979878098842335"
+        rpy="0 0 0" />
+      <mass
+        value="2.22318567608355" />
+      <inertia
+        ixx="0.0105769901062"
+        ixy="-1.03095907575652E-06"
+        ixz="9.30832684723884E-05"
+        iyy="0.0112071774977816"
+        iyz="-1.49157928809528E-08"
+        izz="0.00659269034666982" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.067"
+      rpy="0 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="7.0267104462189E-11 0.0426351402886548 -0.0482569721337471"
+        rpy="0 0 0" />
+      <mass
+        value="1.25469347638256" />
+      <inertia
+        ixx="0.00681707376598388"
+        ixy="-9.55906063830608E-12"
+        ixz="5.05760324883225E-11"
+        iyy="0.00391273673603705"
+        iyz="0.000445604816093975"
+        izz="0.0049573253595571" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="0.0377 0 0.145"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-2.3"
+      upper="2.3"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="link2_sensor1_link">
+    <inertial>
+      <origin
+        xyz="-0.000228568543839791 7.19703164023121E-07 0.0112564931324916"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776281" />
+      <inertia
+        ixx="4.32261598928483E-06"
+        ixy="3.04829332274897E-08"
+        ixz="1.61957363513343E-08"
+        iyy="4.26727737514081E-06"
+        iyz="1.00050856908848E-11"
+        izz="6.1259453751771E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor1_joint"
+    type="fixed">
+    <origin
+      xyz="-0.017 0.109 -0.0377"
+      rpy="1.5708 0 -1.5708" />
+    <parent
+      link="link2" />
+    <child
+      link="link2_sensor1_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link2_sensor1_camera_link">
+    <inertial>
+      <origin
+        xyz="-1.69829428298129E-15 -0.0110000000000001 -0.0795000000000007"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="1.93870456067121E-27"
+        ixz="-6.76824914093002E-25"
+        iyy="3.27363771981099E-10"
+        iyz="5.33929441248022E-25"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor1_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
+    <parent
+      link="link2_sensor1_link" />
+    <child
+      link="link2_sensor1_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link2_sensor1_tof_link">
+    <inertial>
+      <origin
+        xyz="-1.76594849854439E-15 0.011 -0.0795000000000007"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="1.93870456067121E-27"
+        ixz="-6.76824914093002E-25"
+        iyy="3.27363771981099E-10"
+        iyz="5.33929441248022E-25"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor1_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor1_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 -0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
+    <parent
+      link="link2_sensor1_link" />
+    <child
+      link="link2_sensor1_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link2_sensor2_link">
+    <inertial>
+      <origin
+        xyz="-0.000228568543839958 7.19703164025057E-07 0.0112564931324908"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776282" />
+      <inertia
+        ixx="4.32261598928483E-06"
+        ixy="3.0482933227488E-08"
+        ixz="1.61957363513346E-08"
+        iyy="4.26727737514082E-06"
+        iyz="1.00050856903394E-11"
+        izz="6.12594537517711E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor2_joint"
+    type="fixed">
+    <origin
+      xyz="0.017 0.109 -0.0377"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="link2" />
+    <child
+      link="link2_sensor2_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link2_sensor2_camera_link">
+    <inertial>
+      <origin
+        xyz="-6.93889390390723E-17 -0.011 -0.0795000000000007"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="-8.43471116152968E-27"
+        ixz="6.78108932832103E-25"
+        iyy="3.27363771981099E-10"
+        iyz="5.81651271751732E-25"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor2_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
+    <parent
+      link="link2_sensor2_link" />
+    <child
+      link="link2_sensor2_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link2_sensor2_tof_link">
+    <inertial>
+      <origin
+        xyz="-7.54604712049911E-17 0.0110000000000001 -0.0795000000000007"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="-1.40959977432119E-26"
+        ixz="6.72731604947771E-25"
+        iyy="3.27363771981099E-10"
+        iyz="5.706961220746E-25"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link2_sensor2_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link2_sensor2_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 -0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
+    <parent
+      link="link2_sensor2_link" />
+    <child
+      link="link2_sensor2_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="0.0382053785934683 2.69362486658603E-05 -0.116767542432942"
+        rpy="0 0 0" />
+      <mass
+        value="0.582589401925533" />
+      <inertia
+        ixx="0.00217499498948574"
+        ixy="-9.02828549174084E-08"
+        ixz="0.000251445351988843"
+        iyy="0.00207203135682847"
+        iyz="2.44720534552928E-07"
+        izz="0.000663505488104309" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint3"
+    type="revolute">
+    <origin
+      xyz="0 0.142 -0.0377"
+      rpy="1.5708 -1.5708 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="link3_sensor1_link">
+    <inertial>
+      <origin
+        xyz="0.000228568543840069 -7.19703164013098E-07 0.0112564931324908"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776282" />
+      <inertia
+        ixx="4.32261598928483E-06"
+        ixy="3.04829332274915E-08"
+        ixz="-1.61957363513331E-08"
+        iyy="4.26727737514082E-06"
+        iyz="-1.00050856909294E-11"
+        izz="6.1259453751771E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor1_joint"
+    type="fixed">
+    <origin
+      xyz="0.063 0 -0.13425"
+      rpy="0 1.5708 0" />
+    <parent
+      link="link3" />
+    <child
+      link="link3_sensor1_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3_sensor1_camera_link">
+    <inertial>
+      <origin
+        xyz="0.0110000000000008 -0.0109999999999992 -0.000500000000002748"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="5.6169011014011E-36"
+        ixz="3.53135936562297E-25"
+        iyy="3.27363771981099E-10"
+        iyz="1.04944450342311E-26"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor1_camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link3_sensor1_link" />
+    <child
+      link="link3_sensor1_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3_sensor1_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.0109999999999992 0.0110000000000008 -0.000500000000002651"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="7.22177231451008E-36"
+        ixz="3.53135936562297E-25"
+        iyy="3.27363771981099E-10"
+        iyz="1.04944450342308E-26"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor1_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor1_tof_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link3_sensor1_link" />
+    <child
+      link="link3_sensor1_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3_sensor2_link">
+    <inertial>
+      <origin
+        xyz="-0.00022856854384002 7.19703164009378E-07 0.0112564931324908"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776282" />
+      <inertia
+        ixx="4.32261598928483E-06"
+        ixy="3.04829332274916E-08"
+        ixz="1.61957363513339E-08"
+        iyy="4.26727737514082E-06"
+        iyz="1.00050856902159E-11"
+        izz="6.1259453751771E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor2_joint"
+    type="fixed">
+    <origin
+      xyz="0.00075 0 -0.13425"
+      rpy="1.5708 0 -1.5708" />
+    <parent
+      link="link3" />
+    <child
+      link="link3_sensor2_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3_sensor2_camera_link">
+    <inertial>
+      <origin
+        xyz="0.0110000000000002 -0.011 -0.000500000000000004"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="5.61712765819499E-36"
+        ixz="-5.30529265693358E-27"
+        iyy="3.27363771981099E-10"
+        iyz="4.63635670976881E-26"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor2_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="link3_sensor2_link" />
+    <child
+      link="link3_sensor2_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link3_sensor2_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.011 0.011 -0.0005"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="7.22209070680012E-36"
+        ixz="-5.30529265693358E-27"
+        iyy="3.27363771981099E-10"
+        iyz="4.63635670976881E-26"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link3_sensor2_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link3_sensor2_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="link3_sensor2_link" />
+    <child
+      link="link3_sensor2_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4">
+    <inertial>
+      <origin
+        xyz="-1.9648466874461E-05 -0.0695934964300874 -0.0527490114772609"
+        rpy="0 0 0" />
+      <mass
+        value="0.499691951248306" />
+      <inertia
+        ixx="0.00118224707570711"
+        ixy="-1.42437858818247E-07"
+        ixz="-1.88226425968694E-07"
+        iyy="0.000347696574337866"
+        iyz="0.000112751754317425"
+        izz="0.00134960905730777" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint4"
+    type="revolute">
+    <origin
+      xyz="0.045 0 -0.21125"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="link3" />
+    <child
+      link="link4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.65"
+      upper="2.65"
+      effort="100"
+      velocity="-100" />
+  </joint>
+  <link
+    name="link4_sensor1_link">
+    <inertial>
+      <origin
+        xyz="0.000228568543840008 -7.19703163953866E-07 0.0112564931324908"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776281" />
+      <inertia
+        ixx="4.32261598928481E-06"
+        ixy="3.04829332274933E-08"
+        ixz="-1.61957363513334E-08"
+        iyy="4.26727737514081E-06"
+        iyz="-1.0005085691977E-11"
+        izz="6.12594537517709E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor1_joint"
+    type="fixed">
+    <origin
+      xyz="-0.01 -0.115 -0.04225"
+      rpy="3.1416 1.5708 0" />
+    <parent
+      link="link4" />
+    <child
+      link="link4_sensor1_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4_sensor1_camera_link">
+    <inertial>
+      <origin
+        xyz="0.0110000000000006 -0.0110000000000053 -0.000499999999999924"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351933E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="7.36270178218522E-31"
+        ixz="1.22964181563149E-25"
+        iyy="3.27363771981099E-10"
+        iyz="7.50047434365883E-28"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor1_camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link4_sensor1_link" />
+    <child
+      link="link4_sensor1_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4_sensor1_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.0109999999999999 0.0109999999999942 -0.000500000000000063"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="8.56242774233129E-31"
+        ixz="5.18684159067175E-26"
+        iyy="3.27363771981099E-10"
+        iyz="-9.72098268996497E-28"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor1_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor1_tof_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="link4_sensor1_link" />
+    <child
+      link="link4_sensor1_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4_sensor2_link">
+    <inertial>
+      <origin
+        xyz="-0.000228568543839791 7.19703161041699E-07 0.0112564931324909"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776282" />
+      <inertia
+        ixx="4.32261598928484E-06"
+        ixy="3.04829332274894E-08"
+        ixz="1.61957363513335E-08"
+        iyy="4.26727737514083E-06"
+        iyz="1.00050856908462E-11"
+        izz="6.12594537517712E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor2_joint"
+    type="fixed">
+    <origin
+      xyz="0.01 -0.115 -0.04225"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="link4" />
+    <child
+      link="link4_sensor2_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4_sensor2_camera_link">
+    <inertial>
+      <origin
+        xyz="0.011 -0.0109999999999998 -0.000499999999999994"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="1.05181454020942E-30"
+        ixz="-7.45581236687774E-27"
+        iyy="3.27363771981099E-10"
+        iyz="3.64035083444664E-26"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor2_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="link4_sensor2_link" />
+    <child
+      link="link4_sensor2_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link4_sensor2_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.011 0.011 -0.000500000000000028"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351933E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="-7.06687894272806E-31"
+        ixz="1.15931951675418E-27"
+        iyy="3.27363771981099E-10"
+        iyz="-7.01585039963281E-26"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/link4_sensor2_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link4_sensor2_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="link4_sensor2_link" />
+    <child
+      link="link4_sensor2_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="wrist_link1">
+    <inertial>
+      <origin
+        xyz="0.00352707838841083 -5.04666512535803E-05 0.0556606367145202"
+        rpy="0 0 0" />
+      <mass
+        value="0.165249310681234" />
+      <inertia
+        ixx="0.000101827092950678"
+        ixy="-6.96700678034842E-08"
+        ixz="2.6750108803422E-07"
+        iyy="0.00010977530285432"
+        iyz="-2.71303548323365E-08"
+        izz="8.59339042614575E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_joint1"
+    type="revolute">
+    <origin
+      xyz="0 -0.22525 -0.045"
+      rpy="1.5708 -1.5708 0" />
+    <parent
+      link="link4" />
+    <child
+      link="wrist_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="wrist_link2">
+    <inertial>
+      <origin
+        xyz="0.00327492013065951 3.61747870791795E-05 -0.0352410752562717"
+        rpy="0 0 0" />
+      <mass
+        value="0.113563263335891" />
+      <inertia
+        ixx="8.2205660693656E-05"
+        ixy="4.11957711935102E-08"
+        ixz="1.81514767243816E-07"
+        iyy="6.24860697352303E-05"
+        iyz="-1.06157282031952E-06"
+        izz="5.99662395368439E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_joint2"
+    type="revolute">
+    <origin
+      xyz="0.0355 0 0.135"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="wrist_link1" />
+    <child
+      link="wrist_link2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="wrist_link3">
+    <inertial>
+      <origin
+        xyz="0.000122260375717433 -0.0330080421274166 -0.00931468681137599"
+        rpy="0 0 0" />
+      <mass
+        value="0.0627633465287201" />
+      <inertia
+        ixx="4.2581565184529E-05"
+        ixy="1.38030805624569E-06"
+        ixz="3.79394638434364E-11"
+        iyy="3.50631826362204E-05"
+        iyz="-1.11183612133598E-05"
+        izz="4.62054718437767E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/wrist_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_joint3"
+    type="revolute">
+    <origin
+      xyz="0.025625 0 -0.0355"
+      rpy="0 1.5708 0" />
+    <parent
+      link="wrist_link2" />
+    <child
+      link="wrist_link3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.2"
+      upper="1.2"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="EE_sensor1_link">
+    <inertial>
+      <origin
+        xyz="-0.000228568543840006 7.19703163934787E-07 0.0112564931324911"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776282" />
+      <inertia
+        ixx="4.32261598928482E-06"
+        ixy="3.04829332274871E-08"
+        ixz="1.6195736351333E-08"
+        iyy="4.26727737514081E-06"
+        iyz="1.00050856917699E-11"
+        izz="6.1259453751771E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_sensor1_joint"
+    type="fixed">
+    <origin
+      xyz="0.04525 -0.041 -0.025625"
+      rpy="1.5708 0 0" />
+    <parent
+      link="wrist_link3" />
+    <child
+      link="EE_sensor1_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_sensor1_camera_link">
+    <inertial>
+      <origin
+        xyz="0.0110000000000008 -0.0109999999999999 -0.000500000000000167"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="-1.72329294280628E-26"
+        ixz="-2.12272920930827E-27"
+        iyy="3.27363771981099E-10"
+        iyz="8.53954676984438E-26"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_sensor1_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="EE_sensor1_link" />
+    <child
+      link="EE_sensor1_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_sensor1_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.010999999999999 0.0110000000000001 -0.000500000000000389"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="-1.02185886217504E-26"
+        ixz="1.49784455186076E-27"
+        iyy="3.27363771981099E-10"
+        iyz="-2.27283124901971E-26"
+        izz="6.44124668756333E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor1_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_sensor1_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="EE_sensor1_link" />
+    <child
+      link="EE_sensor1_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_snesor2_link">
+    <inertial>
+      <origin
+        xyz="-0.000228568553391928 7.19703176999633E-07 0.0112564931558861"
+        rpy="0 0 0" />
+      <mass
+        value="0.0280853097776281" />
+      <inertia
+        ixx="4.32261598928481E-06"
+        ixy="3.0482933227487E-08"
+        ixz="1.61957363513341E-08"
+        iyy="4.2672773751408E-06"
+        iyz="1.00050856915521E-11"
+        izz="6.12594537517709E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_snesor2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_snesor2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_snesor2_joint"
+    type="fixed">
+    <origin
+      xyz="-0.043469 -0.031168 -0.025625"
+      rpy="-1.5708 0 2.7925" />
+    <parent
+      link="wrist_link3" />
+    <child
+      link="EE_snesor2_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_sensor2_camera_link">
+    <inertial>
+      <origin
+        xyz="0.0109999999999982 -0.0110000000000001 -0.000499999999999945"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351907E-05" />
+      <inertia
+        ixx="3.27363771981085E-10"
+        ixy="-2.71772756515427E-26"
+        ixz="-9.3889285908941E-27"
+        iyy="3.27363771981085E-10"
+        iyz="9.04728794979874E-26"
+        izz="6.44124668756305E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor2_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor2_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_sensor2_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="EE_snesor2_link" />
+    <child
+      link="EE_sensor2_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_sensor2_tof_link">
+    <inertial>
+      <origin
+        xyz="-0.0110000000000019 0.0109999999999998 -0.000500000000000167"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351907E-05" />
+      <inertia
+        ixx="3.27363771981085E-10"
+        ixy="-2.71772756515427E-26"
+        ixz="-9.3889285908941E-27"
+        iyy="3.27363771981085E-10"
+        iyz="9.04728794979874E-26"
+        izz="6.44124668756305E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor2_tof_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_sensor2_tof_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_sensor2_tof_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
+    <parent
+      link="EE_snesor2_link" />
+    <child
+      link="EE_sensor2_tof_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="EE_link">
+    <inertial>
+      <origin
+        xyz="-9.88114513610685E-13 2.01562187044614E-11 -0.000499999974747922"
+        rpy="0 0 0" />
+      <mass
+        value="6.36172512351934E-05" />
+      <inertia
+        ixx="3.27363771981099E-10"
+        ixy="6.89317177127489E-27"
+        ixz="-1.75932146473833E-26"
+        iyy="3.27363771981099E-10"
+        iyz="9.61137713537097E-26"
+        izz="6.44124668756332E-10" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Arm/meshes/EE_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="EE_joint"
+    type="fixed">
+    <origin
+      xyz="0 -0.054 -0.025625"
+      rpy="-1.5708 0 3.1416" />
+    <parent
+      link="wrist_link3" />
+    <child
+      link="EE_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

@@ -4,6 +4,23 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="Arm">
+
+  <!-- ================================================================ -->
+  <!-- Fixed-base mount for Gazebo                                     -->
+  <!-- Gazebo treats the specially named "world" link as the inertial   -->
+  <!-- world. This fixed joint rigidly mounts the arm base to the world -->
+  <!-- while leaving all seven actuated joints controllable.            -->
+  <!-- It also makes world the URDF root, avoiding the KDL warning about -->
+  <!-- an inertial block on the root base_link.                          -->
+  <!-- ================================================================ -->
+  <link name="world" />
+
+  <joint name="world_to_base_fixed_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="world" />
+    <child link="base_link" />
+  </joint>
+
   <link
     name="base_link">
     <inertial>
@@ -257,8 +274,8 @@
     name="link2_sensor1_camera_joint"
     type="fixed">
     <origin
-      xyz="-0.00549999999999967 0.00549999999999994 -0.0569999999999999"
-      rpy="3.14159265358979 0 0" />
+      xyz="-0.0055 0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
     <parent
       link="link2_sensor1_link" />
     <child
@@ -310,8 +327,8 @@
     name="link2_sensor1_tof_joint"
     type="fixed">
     <origin
-      xyz="0.00550000000000034 -0.00550000000000006 -0.0569999999999999"
-      rpy="3.14159265358979 0 0" />
+      xyz="0.0055 -0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
     <parent
       link="link2_sensor1_link" />
     <child
@@ -416,8 +433,8 @@
     name="link2_sensor2_camera_joint"
     type="fixed">
     <origin
-      xyz="-0.00550000000000012 0.00550000000000011 -0.0569999999999999"
-      rpy="-3.14159265358979 0 0" />
+      xyz="-0.0055 0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
     <parent
       link="link2_sensor2_link" />
     <child
@@ -469,8 +486,8 @@
     name="link2_sensor2_tof_joint"
     type="fixed">
     <origin
-      xyz="0.00549999999999984 -0.00549999999999989 -0.0569999999999999"
-      rpy="-3.14159265358979 0 0" />
+      xyz="0.0055 -0.0055 -0.057"
+      rpy="-3.1416 0 -1.5708" />
     <parent
       link="link2_sensor2_link" />
     <child
@@ -633,8 +650,8 @@
     name="link3_sensor1_camera_joint"
     type="fixed">
     <origin
-      xyz="0.00549999999999995 0.0055 0.023"
-      rpy="0 0 -3.14159265358979" />
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 -1.5708" />
     <parent
       link="link3_sensor1_link" />
     <child
@@ -687,7 +704,7 @@
     type="fixed">
     <origin
       xyz="-0.0055 -0.0055 0.023"
-      rpy="0 0 -3.14159265358979" />
+      rpy="0 0 -1.5708" />
     <parent
       link="link3_sensor1_link" />
     <child
@@ -793,7 +810,7 @@
     type="fixed">
     <origin
       xyz="-0.0055 -0.0055 0.023"
-      rpy="0 0 0" />
+      rpy="0 0 1.5708" />
     <parent
       link="link3_sensor2_link" />
     <child
@@ -846,7 +863,7 @@
     type="fixed">
     <origin
       xyz="0.0055 0.0055 0.023"
-      rpy="0 0 0" />
+      rpy="0 0 1.5708" />
     <parent
       link="link3_sensor2_link" />
     <child
@@ -1009,8 +1026,8 @@
     name="link4_sensor1_camera_joint"
     type="fixed">
     <origin
-      xyz="0.0055000000000017 0.00550000000000028 0.0230000000000001"
-      rpy="0 0 3.14159265358979" />
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 -1.5708" />
     <parent
       link="link4_sensor1_link" />
     <child
@@ -1062,8 +1079,8 @@
     name="link4_sensor1_tof_joint"
     type="fixed">
     <origin
-      xyz="-0.0054999999999983 -0.00549999999999984 0.0230000000000001"
-      rpy="0 0 3.14159265358979" />
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 -1.5708" />
     <parent
       link="link4_sensor1_link" />
     <child
@@ -1168,8 +1185,8 @@
     name="link4_sensor2_camera_joint"
     type="fixed">
     <origin
-      xyz="-0.00549999999999995 -0.0055 0.023"
-      rpy="0 0 0" />
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
     <parent
       link="link4_sensor2_link" />
     <child
@@ -1221,8 +1238,8 @@
     name="link4_sensor2_tof_joint"
     type="fixed">
     <origin
-      xyz="0.00549999999999995 0.0055 0.023"
-      rpy="0 0 0" />
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
     <parent
       link="link4_sensor2_link" />
     <child
@@ -1502,7 +1519,7 @@
     type="fixed">
     <origin
       xyz="-0.0055 -0.0055 0.023"
-      rpy="0 0 0" />
+      rpy="0 0 1.5708" />
     <parent
       link="EE_sensor1_link" />
     <child
@@ -1554,8 +1571,8 @@
     name="EE_sensor1_tof_joint"
     type="fixed">
     <origin
-      xyz="0.00549999999907926 0.00550000000001525 0.0229999999747452"
-      rpy="0 0 0" />
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
     <parent
       link="EE_sensor1_link" />
     <child
@@ -1660,8 +1677,8 @@
     name="EE_sensor2_camera_joint"
     type="fixed">
     <origin
-      xyz="-0.00549999999999995 -0.0055 0.0229999999999999"
-      rpy="0 0 0" />
+      xyz="-0.0055 -0.0055 0.023"
+      rpy="0 0 1.5708" />
     <parent
       link="EE_snesor2_link" />
     <child
@@ -1713,8 +1730,8 @@
     name="EE_sensor2_tof_joint"
     type="fixed">
     <origin
-      xyz="0.0055 0.0055 0.0229999999999999"
-      rpy="0 0 0" />
+      xyz="0.0055 0.0055 0.023"
+      rpy="0 0 1.5708" />
     <parent
       link="EE_snesor2_link" />
     <child
@@ -1775,4 +1792,379 @@
     <axis
       xyz="0 0 0" />
   </joint>
+
+  <!-- Gazebo rendering frames and MaixSense prototype sensors on link4.
+       Existing camera/tof links are ROS optical frames: x image-right,
+       y image-down, z viewing-forward. Gazebo rendering cameras view
+       along positive x, so dedicated gz links supply the fixed rotation. -->
+
+  <!-- link4_sensor1 rendering frames -->
+  <link name="link4_sensor1_camera_gz_link">
+    <!-- Massless links are removed during URDF-to-SDF conversion when the
+         fixed joint is preserved. This tiny positive inertia keeps the
+         dedicated Gazebo rendering frame and its attached sensor in SDF. -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.000001" />
+      <inertia
+        ixx="0.000000001"
+        ixy="0"
+        ixz="0"
+        iyy="0.000000001"
+        iyz="0"
+        izz="0.000000001" />
+    </inertial>
+  </link>
+  <joint name="link4_sensor1_camera_gz_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link4_sensor1_camera_link" />
+    <child link="link4_sensor1_camera_gz_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="link4_sensor1_tof_gz_link">
+    <!-- Massless links are removed during URDF-to-SDF conversion when the
+         fixed joint is preserved. This tiny positive inertia keeps the
+         dedicated Gazebo rendering frame and its attached sensor in SDF. -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.000001" />
+      <inertia
+        ixx="0.000000001"
+        ixy="0"
+        ixz="0"
+        iyy="0.000000001"
+        iyz="0"
+        izz="0.000000001" />
+    </inertial>
+  </link>
+  <joint name="link4_sensor1_tof_gz_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link4_sensor1_tof_link" />
+    <child link="link4_sensor1_tof_gz_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- link4_sensor2 rendering frames -->
+  <link name="link4_sensor2_camera_gz_link">
+    <!-- Massless links are removed during URDF-to-SDF conversion when the
+         fixed joint is preserved. This tiny positive inertia keeps the
+         dedicated Gazebo rendering frame and its attached sensor in SDF. -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.000001" />
+      <inertia
+        ixx="0.000000001"
+        ixy="0"
+        ixz="0"
+        iyy="0.000000001"
+        iyz="0"
+        izz="0.000000001" />
+    </inertial>
+  </link>
+  <joint name="link4_sensor2_camera_gz_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link4_sensor2_camera_link" />
+    <child link="link4_sensor2_camera_gz_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="link4_sensor2_tof_gz_link">
+    <!-- Massless links are removed during URDF-to-SDF conversion when the
+         fixed joint is preserved. This tiny positive inertia keeps the
+         dedicated Gazebo rendering frame and its attached sensor in SDF. -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.000001" />
+      <inertia
+        ixx="0.000000001"
+        ixy="0"
+        ixz="0"
+        iyy="0.000000001"
+        iyz="0"
+        izz="0.000000001" />
+    </inertial>
+  </link>
+  <joint name="link4_sensor2_tof_gz_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link4_sensor2_tof_link" />
+    <child link="link4_sensor2_tof_gz_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- Preserve the explicit Gazebo rendering-frame joints for inspection. -->
+  <gazebo reference="link4_sensor1_camera_gz_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="link4_sensor1_tof_gz_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="link4_sensor2_camera_gz_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="link4_sensor2_tof_gz_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+
+  <!-- link4_sensor1 RGB: ideal RGB observation only -->
+  <gazebo reference="link4_sensor1_camera_gz_link">
+    <sensor type="camera" name="link4_sensor1_rgb_sensor">
+      <always_on>true</always_on>
+      <update_rate>10.0</update_rate>
+      <visualize>false</visualize>
+      <camera name="link4_sensor1_rgb_camera">
+        <horizontal_fov>2.0943951023932</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>600</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>5.0</far>
+        </clip>
+      </camera>
+      <plugin name="link4_sensor1_rgb_ros_plugin" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>link4_sensor1_rgb</cameraName>
+        <imageTopicName>/link4_sensor1/rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>/link4_sensor1/rgb/camera_info</cameraInfoTopicName>
+        <frameName>link4_sensor1_camera_link</frameName>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- link4_sensor1 ToF approximation: ideal depth plus PointCloud2 -->
+  <gazebo reference="link4_sensor1_tof_gz_link">
+    <sensor type="depth" name="link4_sensor1_tof_sensor">
+      <always_on>true</always_on>
+      <update_rate>10.0</update_rate>
+      <visualize>false</visualize>
+      <camera name="link4_sensor1_tof_camera">
+        <horizontal_fov>0.9599310885968813</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.15</near>
+          <far>0.75</far>
+        </clip>
+      </camera>
+      <plugin name="link4_sensor1_tof_ros_plugin" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.0</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>link4_sensor1_tof</cameraName>
+        <imageTopicName>/link4_sensor1/tof/internal_rgb_unused/image_raw</imageTopicName>
+        <cameraInfoTopicName>/link4_sensor1/tof/internal_rgb_unused/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>/link4_sensor1/tof/depth_raw</depthImageTopicName>
+        <depthImageCameraInfoTopicName>/link4_sensor1/tof/camera_info</depthImageCameraInfoTopicName>
+        <pointCloudTopicName>/link4_sensor1/tof/cloud</pointCloudTopicName>
+        <frameName>link4_sensor1_tof_link</frameName>
+        <pointCloudCutoff>0.15</pointCloudCutoff>
+        <pointCloudCutoffMax>0.75</pointCloudCutoffMax>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- link4_sensor2 RGB: ideal RGB observation only -->
+  <gazebo reference="link4_sensor2_camera_gz_link">
+    <sensor type="camera" name="link4_sensor2_rgb_sensor">
+      <always_on>true</always_on>
+      <update_rate>10.0</update_rate>
+      <visualize>false</visualize>
+      <camera name="link4_sensor2_rgb_camera">
+        <horizontal_fov>2.0943951023932</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>600</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>5.0</far>
+        </clip>
+      </camera>
+      <plugin name="link4_sensor2_rgb_ros_plugin" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>link4_sensor2_rgb</cameraName>
+        <imageTopicName>/link4_sensor2/rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>/link4_sensor2/rgb/camera_info</cameraInfoTopicName>
+        <frameName>link4_sensor2_camera_link</frameName>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- link4_sensor2 ToF approximation: ideal depth plus PointCloud2 -->
+  <gazebo reference="link4_sensor2_tof_gz_link">
+    <sensor type="depth" name="link4_sensor2_tof_sensor">
+      <always_on>true</always_on>
+      <update_rate>10.0</update_rate>
+      <visualize>false</visualize>
+      <camera name="link4_sensor2_tof_camera">
+        <horizontal_fov>0.9599310885968813</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.15</near>
+          <far>0.75</far>
+        </clip>
+      </camera>
+      <plugin name="link4_sensor2_tof_ros_plugin" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.0</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>link4_sensor2_tof</cameraName>
+        <imageTopicName>/link4_sensor2/tof/internal_rgb_unused/image_raw</imageTopicName>
+        <cameraInfoTopicName>/link4_sensor2/tof/internal_rgb_unused/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>/link4_sensor2/tof/depth_raw</depthImageTopicName>
+        <depthImageCameraInfoTopicName>/link4_sensor2/tof/camera_info</depthImageCameraInfoTopicName>
+        <pointCloudTopicName>/link4_sensor2/tof/cloud</pointCloudTopicName>
+        <frameName>link4_sensor2_tof_link</frameName>
+        <pointCloudCutoff>0.15</pointCloudCutoff>
+        <pointCloudCutoffMax>0.75</pointCloudCutoffMax>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+  <!-- ================================================================ -->
+  <!-- Gazebo ros_control position-interface transmissions              -->
+  <!-- ================================================================ -->
+
+  <!-- ================================================================ -->
+  <!-- Kinematic Gazebo rendering mode                                  -->
+  <!-- The arm state is supplied by arm_sim_node via                     -->
+  <!-- /gazebo/set_model_configuration, not by Gazebo dynamics.          -->
+  <!-- Disable gravity so unactuated joints do not sag between syncs.    -->
+  <!-- ================================================================ -->
+  <gazebo reference="base_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link1">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor1_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor1_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor1_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor2_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor2_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link2_sensor2_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor1_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor1_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor1_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor2_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor2_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link3_sensor2_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor1_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor1_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor1_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor2_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor2_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor2_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="wrist_link1">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="wrist_link2">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="wrist_link3">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_sensor1_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_sensor1_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_sensor1_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_snesor2_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_sensor2_camera_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_sensor2_tof_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="EE_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor1_camera_gz_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor1_tof_gz_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor2_camera_gz_link">
+    <gravity>false</gravity>
+  </gazebo>
+  <gazebo reference="link4_sensor2_tof_gz_link">
+    <gravity>false</gravity>
+  </gazebo>
+
 </robot>

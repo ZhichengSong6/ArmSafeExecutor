@@ -1,0 +1,57 @@
+<launch>
+    <arg name="robot_description_param" default="/robot_description" />
+
+    <arg name="base_frame" default="base_link" />
+    <arg name="ee_frame" default="EE_link" />
+
+    <arg name="joint_states_topic" default="/joint_states" />
+    <arg name="target_pose_topic" default="/ee_target_pose" />
+
+    <!-- Nominal command. This is not directly executed by the arm backend. -->
+    <arg name="nominal_command_topic"
+         default="/arm_controller/joint_ref_nominal" />
+
+    <node pkg="arm_control"
+          type="pinocchio_controller_node"
+          name="pinocchio_controller_node"
+          output="screen">
+
+        <param name="robot_description_param" value="$(arg robot_description_param)" />
+
+        <param name="base_frame" value="$(arg base_frame)" />
+        <param name="ee_frame" value="$(arg ee_frame)" />
+
+        <param name="joint_states_topic" value="$(arg joint_states_topic)" />
+        <param name="target_pose_topic" value="$(arg target_pose_topic)" />
+        <param name="command_topic" value="$(arg nominal_command_topic)" />
+
+        <!-- Current nominal trajectory-generation mode. -->
+        <param name="control_rate" value="100.0" />
+        <param name="trajectory_duration" value="2.0" />
+
+        <!-- 6D IK parameters. -->
+        <param name="ik_max_iters" value="150" />
+        <param name="ik_eps" value="0.0005" />
+        <param name="ik_position_eps" value="0.0005" />
+        <param name="ik_orientation_eps" value="0.05" />
+        <param name="ik_damping" value="0.001" />
+        <param name="ik_step_size" value="0.5" />
+        <param name="ik_max_delta_q" value="0.08" />
+        <param name="orientation_weight" value="0.5" />
+
+        <!-- MIT-style reference fields. -->
+        <param name="default_kp" value="20.0" />
+        <param name="default_kd" value="1.0" />
+        <param name="default_tau_ff" value="0.0" />
+
+        <rosparam param="joint_names">
+            - joint1
+            - joint2
+            - joint3
+            - joint4
+            - wrist_joint1
+            - wrist_joint2
+            - wrist_joint3
+        </rosparam>
+    </node>
+</launch>
