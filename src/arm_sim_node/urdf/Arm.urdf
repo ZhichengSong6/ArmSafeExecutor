@@ -1910,7 +1910,7 @@
   <gazebo reference="link4_sensor1_camera_gz_link">
     <sensor type="camera" name="link4_sensor1_rgb_sensor">
       <always_on>true</always_on>
-      <update_rate>10.0</update_rate>
+      <update_rate>30.0</update_rate>
       <visualize>false</visualize>
       <camera name="link4_sensor1_rgb_camera">
         <horizontal_fov>2.0943951023932</horizontal_fov>
@@ -1944,7 +1944,7 @@
   <gazebo reference="link4_sensor1_tof_gz_link">
     <sensor type="depth" name="link4_sensor1_tof_sensor">
       <always_on>true</always_on>
-      <update_rate>10.0</update_rate>
+      <update_rate>30.0</update_rate>
       <visualize>false</visualize>
       <camera name="link4_sensor1_tof_camera">
         <horizontal_fov>0.9599310885968813</horizontal_fov>
@@ -1979,7 +1979,7 @@
   <gazebo reference="link4_sensor2_camera_gz_link">
     <sensor type="camera" name="link4_sensor2_rgb_sensor">
       <always_on>true</always_on>
-      <update_rate>10.0</update_rate>
+      <update_rate>30.0</update_rate>
       <visualize>false</visualize>
       <camera name="link4_sensor2_rgb_camera">
         <horizontal_fov>2.0943951023932</horizontal_fov>
@@ -2013,7 +2013,7 @@
   <gazebo reference="link4_sensor2_tof_gz_link">
     <sensor type="depth" name="link4_sensor2_tof_sensor">
       <always_on>true</always_on>
-      <update_rate>10.0</update_rate>
+      <update_rate>30.0</update_rate>
       <visualize>false</visualize>
       <camera name="link4_sensor2_tof_camera">
         <horizontal_fov>0.9599310885968813</horizontal_fov>

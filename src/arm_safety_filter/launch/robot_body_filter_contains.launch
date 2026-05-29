@@ -1,0 +1,35 @@
+<launch>
+    <!-- ================================================================ -->
+    <!-- Robot self-filter validation stage                               -->
+    <!--                                                                  -->
+    <!-- Input:                                                           -->
+    <!--   /arm_safety_filter/fused_cloud                                 -->
+    <!--                                                                  -->
+    <!-- Output:                                                          -->
+    <!--   /arm_safety_filter/fused_cloud_filtered                        -->
+    <!--                                                                  -->
+    <!-- Current mode: contains test only.                                -->
+    <!-- Clipping and shadow tests are intentionally disabled because     -->
+    <!-- the input cloud has already been merged from two ToF sensors.    -->
+    <!-- ================================================================ -->
+
+    <param name="/robot_description_self_filter"
+           textfile="$(find arm_safety_filter)/urdf/arm_self_filter.urdf" />
+
+    <node pkg="sensor_filters"
+          type="pointcloud2_filter_chain"
+          name="robot_body_contains_filter"
+          output="screen">
+
+        <rosparam command="load"
+                  file="$(find arm_safety_filter)/config/robot_body_filter_contains.yaml" />
+
+        <remap from="~input"
+               to="/arm_safety_filter/fused_cloud" />
+
+        <remap from="~output"
+               to="/arm_safety_filter/fused_cloud_filtered" />
+
+    </node>
+
+</launch>

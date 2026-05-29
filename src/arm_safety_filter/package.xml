@@ -1,27 +1,32 @@
-<?xml version="1.0"?>
 <package format="2">
-  <name>arm_safety_filter</name>
-  <version>0.0.1</version>
-  <description>Safety filtering modules for nominal robot-arm execution commands.</description>
-
-  <maintainer email="songzhicheng66@gmail.com">zhicheng</maintainer>
-  <license>MIT</license>
-
-  <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>roscpp</depend>
-  <depend>arm_msgs</depend>
-
-  <depend>sensor_msgs</depend>
-  <depend>geometry_msgs</depend>
-
-  <depend>message_filters</depend>
-
-  <depend>tf2</depend>
-  <depend>tf2_ros</depend>
-  <depend>tf2_sensor_msgs</depend>
-
-  <depend>pcl_ros</depend>
-  <depend>pcl_conversions</depend>
-
+<name>arm_safety_filter</name>
+<version>0.0.1</version>
+<description>Safety filtering modules for nominal robot-arm execution commands.</description>
+<maintainer email="songzhicheng66@gmail.com">zhicheng</maintainer>
+<license>MIT</license>
+<buildtool_depend>catkin</buildtool_depend>
+<!--  Core ROS dependencies  -->
+<depend>roscpp</depend>
+<depend>arm_msgs</depend>
+<!--  Point-cloud and visualization messages  -->
+<depend>sensor_msgs</depend>
+<depend>geometry_msgs</depend>
+<depend>visualization_msgs</depend>
+<!--  Two-ToF time synchronization  -->
+<depend>message_filters</depend>
+<!--  TF transformations  -->
+<depend>tf2</depend>
+<depend>tf2_ros</depend>
+<depend>tf2_sensor_msgs</depend>
+<!--  PCL conversion and filtering  -->
+<depend>pcl_ros</depend>
+<depend>pcl_conversions</depend>
+<!--  Simplified robot-geometry parsing  -->
+<depend>urdf</depend>
+<!--  Primitive-versus-current-frame-OcTree distance queries  -->
+<depend>hpp-fcl</depend>
+<depend>octomap</depend>
+<!--  External self-filter nodes used at runtime  -->
+<exec_depend>robot_body_filter</exec_depend>
+<exec_depend>sensor_filters</exec_depend>
 </package>

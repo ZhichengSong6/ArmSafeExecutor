@@ -1,34 +1,75 @@
 <launch>
+    <!-- ================================================================ -->
+    <!-- Simplified primitive robot geometry used both by robot_body_filter -->
+    <!-- and by the merged link4 FCL distance branch in the safety node.   -->
+    <!-- ================================================================ -->
+    <param name="/robot_description_self_filter"
+           textfile="$(find arm_safety_filter)/urdf/arm_self_filter.urdf" />
+
+
     <!-- ================== Pinocchio nominal controller ================== -->
     <node pkg="arm_control"
           type="pinocchio_controller_node"
           name="pinocchio_controller_node"
           output="screen">
 
-        <param name="robot_description_param" value="/robot_description" />
-        <param name="base_frame" value="base_link" />
-        <param name="ee_frame" value="EE_link" />
+        <param name="robot_description_param"
+               value="/robot_description" />
 
-        <param name="joint_states_topic" value="/joint_states" />
-        <param name="target_pose_topic" value="/ee_target_pose" />
+        <param name="base_frame"
+               value="base_link" />
 
-        <param name="command_topic" value="/arm_controller/joint_ref_nominal" />
+        <param name="ee_frame"
+               value="EE_link" />
 
-        <param name="control_rate" value="100.0" />
-        <param name="trajectory_duration" value="2.0" />
+        <param name="joint_states_topic"
+               value="/joint_states" />
 
-        <param name="ik_max_iters" value="150" />
-        <param name="ik_eps" value="0.0005" />
-        <param name="ik_position_eps" value="0.0005" />
-        <param name="ik_orientation_eps" value="0.05" />
-        <param name="ik_damping" value="0.001" />
-        <param name="ik_step_size" value="0.5" />
-        <param name="ik_max_delta_q" value="0.08" />
-        <param name="orientation_weight" value="0.5" />
+        <param name="target_pose_topic"
+               value="/ee_target_pose" />
 
-        <param name="default_kp" value="20.0" />
-        <param name="default_kd" value="1.0" />
-        <param name="default_tau_ff" value="0.0" />
+        <!-- Nominal command is sent to the safety filter first. -->
+        <param name="command_topic"
+               value="/arm_controller/joint_ref_nominal" />
+
+        <param name="control_rate"
+               value="100.0" />
+
+        <param name="trajectory_duration"
+               value="2.0" />
+
+        <param name="ik_max_iters"
+               value="150" />
+
+        <param name="ik_eps"
+               value="0.0005" />
+
+        <param name="ik_position_eps"
+               value="0.0005" />
+
+        <param name="ik_orientation_eps"
+               value="0.05" />
+
+        <param name="ik_damping"
+               value="0.001" />
+
+        <param name="ik_step_size"
+               value="0.5" />
+
+        <param name="ik_max_delta_q"
+               value="0.08" />
+
+        <param name="orientation_weight"
+               value="0.5" />
+
+        <param name="default_kp"
+               value="20.0" />
+
+        <param name="default_kd"
+               value="1.0" />
+
+        <param name="default_tau_ff"
+               value="0.0" />
 
         <rosparam param="joint_names">
             - joint1
@@ -39,54 +80,159 @@
             - wrist_joint2
             - wrist_joint3
         </rosparam>
+
     </node>
 
-    <!-- ========= Safety filter: pass-through + fused point cloud ========= -->
+
+    <!-- ================================================================ -->
+    <!-- Main safety node:                                                -->
+    <!--                                                                  -->
+    <!-- Command branch:                                                  -->
+    <!--   /arm_controller/joint_ref_nominal                              -->
+    <!--       -> current PASS-THROUGH mode                               -->
+    <!--       -> /arm_controller/joint_ref                               -->
+    <!--                                                                  -->
+    <!-- Fusion branch:                                                   -->
+    <!--   two link4 ToF clouds                                           -->
+    <!--       -> remove NaN                                              -->
+    <!--       -> per-sensor VoxelGrid(0.010 m)                           -->
+    <!--       -> TF into base_link                                       -->
+    <!--       -> /arm_safety_filter/fused_cloud                          -->
+    <!--                                                                  -->
+    <!-- Distance branch:                                                 -->
+    <!--   /arm_safety_filter/fused_cloud_filtered                        -->
+    <!--       -> current-frame OcTree                                    -->
+    <!--       -> link4 primitive FCL distance                            -->
+    <!--       -> latest result cache + diagnostic markers/logs           -->
+    <!--                                                                  -->
+    <!-- robot_body_filter remains an external node between fused_cloud   -->
+    <!-- and fused_cloud_filtered.                                        -->
+    <!-- ================================================================ -->
     <node pkg="arm_safety_filter"
           type="pointcloud_qp_safety_filter_node"
           name="pointcloud_qp_safety_filter_node"
           output="screen">
 
-        <!-- Existing command pass-through branch -->
+        <!-- ============================================================ -->
+        <!-- Command pass-through branch                                 -->
+        <!-- ============================================================ -->
         <param name="nominal_command_topic"
                value="/arm_controller/joint_ref_nominal" />
 
         <param name="safe_command_topic"
                value="/arm_controller/joint_ref" />
 
-        <!-- Two link-mounted ToF point-cloud inputs -->
+
+        <!-- ============================================================ -->
+        <!-- Two-ToF fusion branch                                       -->
+        <!-- ============================================================ -->
         <param name="cloud_topic_1"
                value="/link4_sensor1/tof/cloud" />
 
         <param name="cloud_topic_2"
                value="/link4_sensor2/tof/cloud" />
 
-        <!-- Debug outputs after transformation into base_link -->
+        <!-- Optional transformed-cloud debug outputs.
+             These topics are only published when
+             publish_individual_base_clouds is true. -->
         <param name="cloud_1_base_topic"
                value="/arm_safety_filter/cloud_1_base" />
 
         <param name="cloud_2_base_topic"
                value="/arm_safety_filter/cloud_2_base" />
 
-        <!-- Fused XYZ-only point cloud for subsequent safety computation -->
+        <!-- Downsampled fused cloud before robot self-filtering. -->
         <param name="fused_cloud_topic"
                value="/arm_safety_filter/fused_cloud" />
 
         <param name="target_frame"
                value="base_link" />
 
-        <!-- Synchronization and TF settings -->
+        <!-- Remove NaNs first, then downsample each ToF cloud before
+             TF transformation and fusion. -->
+        <param name="enable_voxel_downsample"
+               value="true" />
+
+        <!-- Verified current setting:
+             dense visible-surface case reduced from about 76800 points
+             to about 2599 points while filtered output remained near 30 Hz. -->
+        <param name="voxel_leaf_size"
+               value="0.010" />
+
+        <!-- Keep false during performance tests to avoid extra point-cloud
+             publications and RViz rendering overhead. -->
+        <param name="publish_individual_base_clouds"
+               value="false" />
+
+        <!-- Only keep recent observations; do not accumulate stale clouds. -->
         <param name="cloud_sub_queue_size"
-               value="5" />
+               value="1" />
 
         <param name="cloud_sync_queue_size"
-               value="10" />
+               value="2" />
 
         <param name="cloud_sync_slop"
-               value="0.05" />
+               value="0.03" />
 
         <param name="tf_timeout"
                value="0.05" />
 
+
+        <!-- ============================================================ -->
+        <!-- Primitive FCL distance branch                               -->
+        <!-- ============================================================ -->
+
+        <!-- This input is produced by the separately launched
+             robot_body_filter node. It must be the self-filtered cloud,
+             not /arm_safety_filter/fused_cloud. -->
+        <param name="filtered_cloud_topic"
+               value="/arm_safety_filter/fused_cloud_filtered" />
+
+        <!-- Read primitive collision geometry from the same simplified
+             URDF used by robot_body_filter. -->
+        <param name="robot_description_param"
+               value="/robot_description_self_filter" />
+
+        <!-- Current Step B protects and diagnoses only link4. -->
+        <param name="protected_link"
+               value="link4" />
+
+        <!-- The upstream fused cloud is already downsampled at 1 cm;
+             use the same occupied-space discretization here. -->
+        <param name="octree_resolution"
+               value="0.010" />
+
+        <!-- Timestamp-matched TF lookup timeout for link4 distance query. -->
+        <param name="distance_tf_timeout"
+               value="0.05" />
+
+        <!-- Diagnostic threshold only; command correction is not active yet. -->
+        <param name="warning_distance"
+               value="0.03" />
+
+        <!-- Diagnostic closest-point markers. -->
+        <param name="distance_marker_topic"
+               value="/arm_safety_filter/link4_primitive_distance_markers" />
+
+        <param name="enable_distance_markers"
+               value="true" />
+
+        <param name="marker_point_scale"
+               value="0.015" />
+
+        <param name="line_scale"
+               value="0.004" />
+
+        <!-- Throttled distance/timing log period. -->
+        <param name="distance_log_period"
+               value="1.0" />
+
+        <!-- Reserved for the later QP step:
+             cached distance observations older than this value must not
+             be treated as fresh safety constraints. -->
+        <param name="max_observation_age"
+               value="0.10" />
+
     </node>
+
 </launch>

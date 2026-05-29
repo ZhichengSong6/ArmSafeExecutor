@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="ArmSelfFilter">
+  <!--
+  Primitive collision-only robot model for robot_body_filter.
+  Extracted from the user's RViz-checked URDF collision configuration.
+  Load this model as /robot_description_self_filter only.
+
+  Sensor child links are intentionally omitted: their bodies are
+  covered by collision primitives on the corresponding main links.
+
+  Collision-bearing links:
+    base_link, link1, link2, link3, link4,
+    wrist_link1, wrist_link2, wrist_link3
+
+  Frame-only link:
+    EE_link
+-->
+  <link name="base_link">
+    <collision name="base_link_main_body">
+      <origin xyz="0 0 0.034" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.078" length="0.068" />
+      </geometry>
+    </collision>
+    <collision name="base_link_lower_flange">
+      <origin xyz="0 0 0.008" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.089" length="0.015" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="link1">
+    <collision name="link1_lower_flange">
+      <origin xyz="0 0 0.008" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.073" length="0.018" />
+      </geometry>
+    </collision>
+    <collision name="link1_support">
+      <origin xyz="0 0 0.074" rpy="0 0 0" />
+      <geometry>
+        <box size="0.115 0.115 0.125" />
+      </geometry>
+    </collision>
+    <collision name="link1_upper_joint">
+      <origin xyz="0 0 0.145" rpy="0 1.57079632679 0" />
+      <geometry>
+        <cylinder radius="0.071" length="0.145" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="link2">
+    <collision name="link2_joint_disk">
+      <origin xyz="0 0 -0.043" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.061" length="0.145" />
+      </geometry>
+    </collision>
+    <collision name="link2_main_body">
+      <origin xyz="0 0.071 -0.043" rpy="0 0 0" />
+      <geometry>
+        <box size="0.086 0.138 0.155" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="link3">
+    <collision name="link3_proximal_body">
+      <origin xyz="-0.000 0 -0.037" rpy="0 0 0" />
+      <geometry>
+        <box size="0.095 0.095 0.074" />
+      </geometry>
+    </collision>
+    <collision name="link3_arm_body">
+      <origin xyz="0.02 0 -0.127" rpy="0 0 0" />
+      <geometry>
+        <box size="0.090 0.102 0.122" />
+      </geometry>
+    </collision>
+    <collision name="link3_arm_body2">
+      <origin xyz="0.075 0 -0.135" rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.056 0.055" />
+      </geometry>
+    </collision>
+    <collision name="link3_distal_joint">
+      <origin xyz="0.012 0 -0.212" rpy="0 1.57079632679 0" />
+      <geometry>
+        <cylinder radius="0.050" length="0.105" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="link4">
+    <collision name="link4_proximal_joint">
+      <origin xyz="0 0 -0.039" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.050" length="0.078" />
+      </geometry>
+    </collision>
+    <collision name="link4_main_body">
+      <origin xyz="0 -0.080 -0.051" rpy="0 0 0" />
+      <geometry>
+        <box size="0.090 0.170 0.064" />
+      </geometry>
+    </collision>
+    <collision name="link4_distal_joint">
+      <origin xyz="0 -0.205 -0.045" rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.063" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="wrist_link1">
+    <collision name="wrist_link1_motor">
+      <origin xyz="0 0 0.050" rpy="0 1.57079632679 0" />
+      <geometry>
+        <cylinder radius="0.032" length="0.065" />
+      </geometry>
+    </collision>
+    <collision name="wrist_link1_connector">
+      <origin xyz="0 0 0.111" rpy="0 0 0" />
+      <geometry>
+        <box size="0.090 0.015 0.050" />
+      </geometry>
+    </collision>
+    <collision name="wrist_link1_terminal">
+      <origin xyz="0 0 0.136" rpy="0 1.57079632679 0" />
+      <geometry>
+        <cylinder radius="0.010" length="0.086" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="wrist_link2">
+    <collision name="wrist_link2_motor">
+      <origin xyz="-0.0003 0 -0.0345" rpy="0 1.57079632679 0" />
+      <geometry>
+        <cylinder radius="0.0325" length="0.056" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="wrist_link3">
+    <collision name="wrist_link3_plate">
+      <origin xyz="0 -0.020 0.006" rpy="0 0 0" />
+      <geometry>
+        <box size="0.038 0.070 0.008" />
+      </geometry>
+    </collision>
+    <collision name="wrist_link3_side_plate">
+      <origin xyz="0 -0.050 -0.02" rpy="0 0 0" />
+      <geometry>
+        <box size="0.048 0.010 0.068" />
+      </geometry>
+    </collision>
+    <collision name="wrist_link3_sensor1_block">
+      <origin xyz="0.045 -0.052 -0.0255" rpy="0 0 0" />
+      <geometry>
+        <box size="0.035 0.025 0.055" />
+      </geometry>
+    </collision>
+    <collision name="wrist_link3_sensor2_block">
+      <origin xyz="-0.047 -0.041 -0.0255" rpy="0 0 -0.35" />
+      <geometry>
+        <box size="0.035 0.025 0.055" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="EE_link" />
+  <joint name="joint1" type="revolute">
+    <origin xyz="0 0 0.067" rpy="0 0 1.5707963267949" />
+    <parent link="base_link" />
+    <child link="link1" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="100" />
+  </joint>
+  <joint name="joint2" type="revolute">
+    <origin xyz="0.0377 0 0.145" rpy="1.5707963267949 0 1.5707963267949" />
+    <parent link="link1" />
+    <child link="link2" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.3" upper="2.3" effort="100" velocity="100" />
+  </joint>
+  <joint name="joint3" type="revolute">
+    <origin xyz="0 0.142 -0.0377000000000009" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link2" />
+    <child link="link3" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="100" />
+  </joint>
+  <joint name="joint4" type="revolute">
+    <origin xyz="0.0450000000000012 0 -0.21125" rpy="1.5707963267949 0 1.5707963267949" />
+    <parent link="link3" />
+    <child link="link4" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.65" upper="2.65" effort="100" velocity="100" />
+  </joint>
+  <joint name="wrist_joint1" type="revolute">
+    <origin xyz="0 -0.22525 -0.0449999999999971" rpy="1.5707963267949 -1.5707963267949 0" />
+    <parent link="link4" />
+    <child link="wrist_link1" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="100" />
+  </joint>
+  <joint name="wrist_joint2" type="revolute">
+    <origin xyz="0.03549999993081 0 0.134999999945961" rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent link="wrist_link1" />
+    <child link="wrist_link2" />
+    <axis xyz="0 0 1" />
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="100" />
+  </joint>
+  <joint name="wrist_joint3" type="revolute">
+    <origin xyz="0.0256250000410695 0 -0.0354999999325699" rpy="0 1.5707963267949 0" />
+    <parent link="wrist_link2" />
+    <child link="wrist_link3" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.2" upper="1.2" effort="100" velocity="100" />
+  </joint>
+  <joint name="EE_joint" type="fixed">
+    <origin xyz="0 -0.053999999971988 -0.0256250000093045" rpy="-1.5707963267949 0 3.14159265358979" />
+    <parent link="wrist_link3" />
+    <child link="EE_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+</robot>

@@ -1,0 +1,164 @@
+# ================================================================
+# Robot self-filter configuration for fused ToF point cloud
+#
+# Input:
+#   /arm_safety_filter/fused_cloud
+#
+# Output:
+#   /arm_safety_filter/fused_cloud_filtered
+#
+# Current mode:
+#   - contains test only
+#   - no clipping
+#   - no shadow test
+#
+# Reason:
+#   The input cloud has already fused measurements from two ToF sensors
+#   and has already been transformed into base_link. Therefore the
+#   original per-sensor viewpoints are no longer available, so sensor-
+#   origin-dependent clipping and shadow filtering are intentionally
+#   disabled in this validation stage.
+# ================================================================
+
+cloud_filter_chain:
+  - name: RobotBodyContainsFilter
+    type: robot_body_filter/RobotBodyFilterPointCloud2
+    params:
+
+      # ------------------------------------------------------------
+      # Acquisition mode
+      # ------------------------------------------------------------
+      # MaixSense/Gazebo ToF produces frame-based depth observations.
+      # Although fused_cloud is compacted into height=1 after NaN
+      # removal, it is not a point-by-point spinning-lidar scan.
+      sensor/point_by_point: false
+
+      # ------------------------------------------------------------
+      # Frames
+      # ------------------------------------------------------------
+      # fused_cloud is already expressed in base_link.
+      frames/fixed: "base_link"
+      frames/filtering: "base_link"
+      frames/output: "base_link"
+
+      # ------------------------------------------------------------
+      # Point-cloud output behavior
+      # ------------------------------------------------------------
+      # fused_cloud is already unorganized after valid-point compaction.
+      # Filtered self points will therefore be removed from the output.
+      filter/keep_clouds_organized: false
+
+      # ------------------------------------------------------------
+      # Enabled filter tests
+      # ------------------------------------------------------------
+      # Clipping is disabled because points originate from two different
+      # ToF sensors after fusion.
+      filter/do_clipping: false
+
+      # This is the self-observation removal operation we need now.
+      filter/do_contains_test: true
+
+      # Shadow test is disabled because the fused cloud no longer keeps
+      # the original sensor viewpoint for each point, and shadow testing
+      # is also significantly more expensive.
+      filter/do_shadow_test: false
+
+      # Not active while clipping is disabled. Kept here as documentation
+      # of the simulated ToF sensing range.
+      sensor/min_distance: 0.15
+      sensor/max_distance: 0.70
+
+      # ------------------------------------------------------------
+      # Robot collision model
+      # ------------------------------------------------------------
+      # The filter reads collision geometry from the currently loaded URDF.
+      # For mesh collision elements, robot_body_filter uses their convex
+      # hull for the contains test.
+      body_model/robot_description_param: "/robot_description_self_filter"
+
+      # Global collision-model inflation.
+      body_model/inflation/scale: 1.0
+      body_model/inflation/padding: 0.0
+
+      # Contains-test-specific inflation.
+      # Start with 5 mm because 3 mm left small robot self-point residuals.
+      # Do not increase this aggressively: large padding can delete real
+      # obstacles that are close to the robot.
+      body_model/inflation/contains_test/scale: 1.0
+      body_model/inflation/contains_test/padding: 0.003
+
+      # Shadow parameters are inactive because shadow testing is disabled.
+      body_model/inflation/shadow_test/scale: 1.0
+      body_model/inflation/shadow_test/padding: 0.0
+
+      # ------------------------------------------------------------
+      # Links participating in self filtering
+      # ------------------------------------------------------------
+      # Important:
+      #   Self filtering must include every robot part that can appear in
+      #   either ToF view, not only the link currently protected by QP.
+      #
+      #   base_link is included here because your residual points appear
+      #   near the lower part of the robot and may originate from the base
+      #   or the proximal links.
+      #
+      #   Later, links confirmed to be impossible to observe can be removed
+      #   to reduce computation.
+      only_links:
+        - "base_link"
+        - "link1"
+        - "link2"
+        - "link3"
+        # - "link4"
+        - "wrist_link1"
+        - "wrist_link2"
+        - "wrist_link3"
+
+      # No extra exclusions in the current contains-only test.
+      ignored_links/everywhere: []
+      ignored_links/contains_test: []
+      ignored_links/shadow_test: []
+
+      # ------------------------------------------------------------
+      # TF handling
+      # ------------------------------------------------------------
+      transforms/buffer_length: 15.0
+      transforms/timeout/reachable: 0.10
+      transforms/timeout/unreachable: 0.20
+      transforms/require_all_reachable: false
+
+      # ------------------------------------------------------------
+      # Bounding-shape computations disabled
+      # ------------------------------------------------------------
+      bounding_sphere/compute: false
+      bounding_sphere/debug: false
+      bounding_sphere/marker: false
+      bounding_sphere/publish_cut_out_pointcloud: false
+
+      bounding_box/compute: false
+      bounding_box/debug: false
+      bounding_box/marker: false
+      bounding_box/publish_cut_out_pointcloud: false
+
+      oriented_bounding_box/compute: false
+      oriented_bounding_box/debug: false
+      oriented_bounding_box/marker: false
+      oriented_bounding_box/publish_cut_out_pointcloud: false
+
+      local_bounding_box/frame_id: "base_link"
+      local_bounding_box/compute: false
+      local_bounding_box/debug: false
+      local_bounding_box/marker: false
+      local_bounding_box/publish_cut_out_pointcloud: false
+
+      # ------------------------------------------------------------
+      # Debug publications disabled for performance measurement
+      # ------------------------------------------------------------
+      debug/pcl/inside: false
+      debug/pcl/clip: false
+      debug/pcl/shadow: false
+
+      debug/marker/contains: false
+      debug/marker/shadow: false
+      debug/marker/bounding_sphere: false
+      debug/marker/bounding_box: false
